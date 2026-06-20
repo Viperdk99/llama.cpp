@@ -6,7 +6,11 @@
 #include <sstream>
 #include <algorithm>
 
-#if __cplusplus >= 202000L
+#if defined(__cpp_char8_t)
+    #define LU8(x) (const char*)(u8##x)
+#elif __cplusplus >= 202000L
+    #define LU8(x) (const char*)(u8##x)
+#elif defined(_MSVC_LANG) && _MSVC_LANG >= 202002L
     #define LU8(x) (const char*)(u8##x)
 #else
     #define LU8(x) u8##x
