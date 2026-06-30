@@ -14,6 +14,19 @@
 
 #define FILENAME "jinja-value"
 
+
+// ALLAMAPLUS_UTF8_FORWARD_DECLS
+struct utf8_parse_result {
+    uint32_t codepoint;
+    size_t bytes_consumed;
+    enum status { SUCCESS, INCOMPLETE, INVALID } status;
+
+    utf8_parse_result(enum status s, uint32_t cp = 0, size_t bytes = 0)
+        : codepoint(cp), bytes_consumed(bytes), status(s) {}
+};
+
+utf8_parse_result common_parse_utf8_codepoint(std::string_view input, size_t offset);
+
 namespace jinja {
 
 // func_args method implementations
